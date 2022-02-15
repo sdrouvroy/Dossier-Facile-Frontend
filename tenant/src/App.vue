@@ -6,20 +6,15 @@
       @on-create-owner="onCreateOwner"
       @on-logout="onLogout"
       @on-change-lang="changeLang"
+      :showAccessibility="isFunnel"
       :lang="getLang()"
     >
-      <Menu :user="user" />
+      <Menu />
     </MyHeader>
-    <div class="fr-container">
-      <div class="fr-mt-3w fr-mb-3w">
-        Notre serveur d'envois de mail est actuellement indisponible. Nous
-        mettons tout en œuvre pour résoudre ce problème au plus vite.
-      </div>
-    </div>
     <article class="page">
       <router-view :key="$route.path" />
     </article>
-    <TheFooter v-if="showFooter" />
+    <TheFooter v-if="!isFunnel" />
     <Cookies
       :hidden="cookieHidden"
       @accept="acceptCookies"
@@ -50,7 +45,7 @@ import router from "./router";
     ...mapState({
       user: "user",
       status: "status",
-      showFooter: "showFooter"
+      isFunnel: "isFunnel"
     }),
     ...mapGetters({
       isLoggedIn: "isLoggedIn"
@@ -58,7 +53,7 @@ import router from "./router";
   }
 })
 export default class App extends Vue {
-  showFooter!: boolean;
+  isFunnel!: boolean;
   cookieHidden = this.$cookies.isKey("accept-cookie");
   isLoggedIn!: boolean;
   OWNER_URL = `//${process.env.VUE_APP_OWNER_URL}`;

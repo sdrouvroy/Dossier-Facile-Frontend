@@ -240,6 +240,7 @@ import BigRadio from "df-shared/src/Button/BigRadio.vue";
 import cloneDeep from "lodash/cloneDeep";
 import { AnalyticsService } from "../../../services/AnalyticsService";
 import AllDeclinedMessages from "../share/AllDeclinedMessages.vue";
+import { DocumentDeniedReasons } from "df-shared/src/models/DocumentDeniedReasons";
 
 extend("regex", {
   ...regex,
@@ -285,6 +286,7 @@ export default class GuarantorFinancialDocumentForm extends Vue {
   financialDocument = new FinancialDocument();
   guarantorFinancialDocuments!: FinancialDocument[];
 
+  documentDeniedReasons = new DocumentDeniedReasons();
   documents = DocumentTypeConstants.GUARANTOR_FINANCIAL_DOCS;
   isDocDeleteVisible = false;
   selectedDoc?: FinancialDocument;
@@ -294,6 +296,11 @@ export default class GuarantorFinancialDocumentForm extends Vue {
     this.financialDocument = {
       ...cloneDeep(this.guarantorFinancialDocumentSelected)
     };
+    if (this.guarantorFinancialDocument()?.documentDeniedReasons) {
+      this.documentDeniedReasons = cloneDeep(
+        this.guarantorFinancialDocument()?.documentDeniedReasons
+      );
+    }
   }
 
   isNewDocument(f: FinancialDocument) {
@@ -310,10 +317,6 @@ export default class GuarantorFinancialDocumentForm extends Vue {
 
   get documentStatus() {
     return this.guarantorFinancialDocument()?.documentStatus;
-  }
-
-  get documentDeniedReasons() {
-    return this.guarantorFinancialDocument()?.documentDeniedReasons;
   }
 
   guarantorFinancialDocument() {
@@ -609,6 +612,7 @@ export default class GuarantorFinancialDocumentForm extends Vue {
   "will-delete-files": "Please note, a change of situation will result in the deletion of your supporting documents. You will have to upload the supporting documents corresponding to your situation again.",
   "register": "Register",
   "warning-no-income-and-file": "You can't have files and no income. You must uncheck the box or delete your files.",
+  "missing-file": "You must add files to save this income.",
   "select-label": "Attention, Please enter only your guarantor own income."
 },
 "fr": {
@@ -638,6 +642,7 @@ export default class GuarantorFinancialDocumentForm extends Vue {
   "will-delete-files": "Attention, un changement de situation entraînera la suppression des justificatifs. Vous devrez charger de nouveau les justificatifs correspondant à la situation de votre garant.",
   "register": "Enregistrer",
   "select-label": "Attention, veuillez renseigner uniquement les revenus de votre garant.",
+  "missing-file": "Vous devez ajouter des fichiers pour sauvegarder ce revenu.",
   "warning-no-income-and-file": "Vous ne pouvez pas avoir des fichiers et indiquer ne pas pouvoir fournir tous les fichiers. Veuillez décocher la case ou supprimer vos fichiers."
 }
 }

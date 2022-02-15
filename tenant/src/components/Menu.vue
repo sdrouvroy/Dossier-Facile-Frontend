@@ -1,7 +1,11 @@
 <template>
   <ul class="fr-nav__list">
-    <li class="fr-nav__item" v-if="user">
-      <a href="/messaging" class="fr-nav__link">
+    <li class="fr-nav__item" v-if="isLoggedIn">
+      <a
+        href="/messaging"
+        class="fr-nav__link"
+        :aria-current="currentPage() === 'Messages' ? 'page' : false"
+      >
         {{ $t("messaging") }}
         <span v-if="newMessage > 0" class="badge">{{ newMessage }}</span>
       </a>
@@ -26,20 +30,25 @@
         {{ $t("information") }}
       </a>
     </li>
-    <li class="fr-nav__item" v-if="user">
+    <li class="fr-nav__item" v-if="isLoggedIn">
       <button
         class="fr-nav__btn"
         aria-expanded="false"
         aria-controls="menu-774"
+        :aria-current="currentPage() === 'Account' ? true : false"
       >
         {{ $t("account") }}
       </button>
       <div class="fr-collapse fr-menu" id="menu-774">
         <ul class="fr-menu__list">
           <li>
-            <a class="fr-nav__link" href="/account" target="_self">{{
-              $t("file")
-            }}</a>
+            <a
+              class="fr-nav__link"
+              href="/account"
+              target="_self"
+              :aria-current="currentPage() === 'Account' ? 'page' : false"
+              >{{ $t("file") }}</a
+            >
           </li>
           <li class="warn">
             <a
@@ -63,7 +72,6 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { User } from "df-shared/src/models/User";
 import { mapGetters } from "vuex";
 import DeleteAccount from "./DeleteAccount.vue";
 
@@ -73,18 +81,22 @@ import DeleteAccount from "./DeleteAccount.vue";
   },
   computed: {
     ...mapGetters({
-      user: "userToEdit",
-      newMessage: "newMessage"
+      newMessage: "newMessage",
+      isLoggedIn: "isLoggedIn"
     })
   }
 })
 export default class Menu extends Vue {
-  user?: User;
+  isLoggedIn?: boolean;
   newMessage!: number;
   isDeleteModalVisible = false;
 
   MAIN_URL = `//${process.env.VUE_APP_MAIN_URL}`;
   DOCS_URL = `//${process.env.VUE_APP_DOCS_URL}`;
+
+  currentPage() {
+    return this.$route.name;
+  }
 }
 </script>
 

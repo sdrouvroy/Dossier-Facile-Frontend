@@ -27,7 +27,7 @@ export class DfState {
   newMessage = 0;
   spouseAuthorize = false;
   coTenantAuthorize = false;
-  showFooter = true;
+  isFunnel = false;
   financialDocumentSelected?: FinancialDocument = new FinancialDocument();
   editFinancialDocument = false;
 }
@@ -145,8 +145,8 @@ const store = new Vuex.Store({
     updateCoTenantAuthorize(state, authorize) {
       state.coTenantAuthorize = authorize;
     },
-    showFooter(state, showFooter) {
-      state.showFooter = showFooter;
+    isFunnel(state, isFunnel) {
+      state.isFunnel = isFunnel;
     },
     updateUserFirstname(state, firstname) {
       state.user.firstName = firstname;
@@ -243,10 +243,10 @@ const store = new Vuex.Store({
       );
     },
     setNames({ commit }, user: User) {
-      if (user.firstName) {
+      if (user.firstName && !user.franceConnect) {
         user.firstName = UtilsService.capitalize(user.firstName);
       }
-      if (user.lastName) {
+      if (user.lastName && !user.franceConnect) {
         user.lastName = UtilsService.capitalize(user.lastName);
       }
       return ProfileService.saveNames(user).then(
@@ -576,7 +576,11 @@ const store = new Vuex.Store({
       );
     },
     firstProfilePage() {
-      if (!this.state.user.firstName || !this.state.user.lastName) {
+      if (
+        !this.state.user.firstName ||
+        !this.state.user.lastName ||
+        !this.state.user.zipCode
+      ) {
         router.push({ name: "TenantName" });
         return;
       }

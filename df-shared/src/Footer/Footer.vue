@@ -19,28 +19,26 @@
             <li class="fr-col-lg-3 fr-col-6 align-right">
               <a
                 class="fr-footer__content-link"
-                href="https://legifrance.gouv.fr">
+                href="https://legifrance.gouv.fr"
+              >
                 legifrance.gouv.fr
               </a>
             </li>
             <li class="fr-col-lg-3 fr-col-6 align-right">
-              <a
-                class="fr-footer__content-link"
-                href="https://gouvernement.fr">
+              <a class="fr-footer__content-link" href="https://gouvernement.fr">
                 gouvernement.fr
               </a>
             </li>
             <li class="fr-col-lg-3 fr-col-6 align-right">
               <a
                 class="fr-footer__content-link"
-                href="https://service-public.fr">
+                href="https://service-public.fr"
+              >
                 service-public.fr
               </a>
             </li>
             <li class="fr-col-lg-3 fr-col-6 align-right">
-              <a
-                class="fr-footer__content-link"
-                href="https://data.gouv.fr">
+              <a class="fr-footer__content-link" href="https://data.gouv.fr">
                 data.gouv.fr
               </a>
             </li>
@@ -51,7 +49,7 @@
         <ul class="fr-footer__bottom-list">
           <li class="fr-footer__bottom-item">
             <a class="fr-footer__bottom-link" href="https://beta.gouv.fr/">
-            Les startups d'Etat
+              Les startups d'Etat
             </a>
           </li>
           <li class="fr-footer__bottom-item">
@@ -60,7 +58,7 @@
               :href="`${VUE_APP_DOCS_URL}`"
               target="_blank"
               rel="noreferrer"
-              title=`{{ $t("faq") }} - nouvelle fenêtre"
+              :title="$t('faq-link-title')"
             >
               {{ $t("faq") }}
             </a>
@@ -89,9 +87,13 @@
             >
           </li>
           <li class="fr-footer__bottom-item">
-            <a class="fr-footer__bottom-link" href="#">{{
-              $t("accessibility")
-            }}</a>
+            <a
+              class="fr-footer__bottom-link"
+              :href="`${VUE_APP_MAIN_URL}/accessibilite`"
+              target="_blank"
+              :title="$t('accessibility-link')"
+              >{{ $t("accessibility") }}</a
+            >
           </li>
           <li class="fr-footer__bottom-item">
             <a
@@ -123,7 +125,7 @@
               href="https://partenaire.dossierfacile.fr"
               target="_blank"
               rel="noreferrer"
-              title=`{{ $t("partner") }} - nouvelle fenêtre`
+              :title="$t('partner-link-title')"
             >
               {{ $t("partner") }}
             </a>
@@ -285,7 +287,10 @@ export default class TheFooter extends Vue {
     "sources": "Source code",
     "accessibility": "Accessibility: not compliant",
     "statistics": "Statistics",
-    "partner": "Partners"
+    "partner": "Partners",
+    "faq-link-title": "Help - new window",
+    "partner-link-title": "Partners - new window",
+    "accessibility-link": "Accessibility - new window"
   },
   "fr": {
     "contact": "Nous écrire",
@@ -296,7 +301,10 @@ export default class TheFooter extends Vue {
     "sources": "Code source",
     "accessibility": "Accessibilité: non conforme",
     "statistics": "Statistiques",
-    "partner": "Partenaires"
+    "partner": "Partenaires",
+    "faq-link-title": "Aide - nouvelle fenêtre",
+    "partner-link-title": "Partenaires - nouvelle fenêtre",
+    "accessibility-link": "Déclaration d'accessibilité - nouvelle fenêtre"
   }
 }
 </i18n>

@@ -1,11 +1,5 @@
 <template>
   <div>
-    <div class="fr-container">
-      <div class="fr-mt-3w fr-mb-3w">
-        Notre serveur d'envois de mail est actuellement indisponible. Nous
-        mettons tout en œuvre pour résoudre ce problème au plus vite.
-      </div>
-    </div>
     <section class="s0-background fr-pb-md-5w fr-pt-md-9w fr-pt-3w">
       <div class="fr-container">
         <div class="fr-col-md-8">
@@ -90,7 +84,7 @@
           <div class="fr-col-md-6 fr-grid-col">
             <div class="fr-grid-row align-items--center">
               <div class="step-number">1</div>
-              <h2 class="fr-h4 fr-mb-0">{{ $t("s2.h1") }}</h2>
+              <h3 class="fr-h4 fr-mb-0">{{ $t("s2.h1") }}</h3>
             </div>
             <div>{{ $t("s2.p1") }}</div>
             <ul class="fr-pt-2w fr-mb-5w">
@@ -103,13 +97,13 @@
 
             <div class="fr-grid-row align-items--center">
               <div class="step-number">2</div>
-              <h2 class="fr-h4 fr-mb-0">{{ $t("s2.h2") }}</h2>
+              <h3 class="fr-h4 fr-mb-0">{{ $t("s2.h2") }}</h3>
             </div>
             <p>{{ $t("s2.p2") }}</p>
 
             <div class="fr-grid-row align-items--center">
               <div class="step-number">3</div>
-              <h2 class="fr-h4 fr-mb-0">{{ $t("s2.h3") }}</h2>
+              <h3 class="fr-h4 fr-mb-0">{{ $t("s2.h3") }}</h3>
             </div>
             <p>{{ $t("s2.p3") }}</p>
             <DfButton class="fr-mt-2w" @on-click="gotoDocs">

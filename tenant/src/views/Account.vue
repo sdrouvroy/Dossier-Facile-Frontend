@@ -17,22 +17,17 @@
             </div>
             <div class="fr-callout fr-callout-white" v-if="canCopyLink()">
               <h4>{{ $t("congratulations-title") }}</h4>
-              <p
-                class="fr-callout__text fr-mb-3w"
-                v-html="$t('congratulations-text-1')"
-              ></p>
-              <p
-                class="fr-callout__text"
-                v-html="$t('congratulations-text-2')"
-              ></p>
+              <p class="fr-mb-3w" v-html="$t('congratulations-text-1')"></p>
+              <p v-html="$t('congratulations-text-2')"></p>
             </div>
             <div class="main fr-mt-5w fr-p-4w bg-white">
               <div class="main-bar fr-grid-row">
-                <div class="header-title">
+                <div class="header-title mobile-margin">
                   <h4 class="fr-mr-2w fr-mb-0 fr-mt-0">{{ $t("my-file") }}</h4>
                 </div>
 
                 <ColoredTag
+                  class="mobile-margin"
                   :text="$t('s_' + user.status)"
                   :status="user.status"
                 ></ColoredTag>
@@ -40,6 +35,7 @@
                 <span class="spacer"></span>
                 <div class="fr-grid-row btn-container">
                   <DfButton
+                    class="main-copy-btn"
                     @on-click="copyFullLink()"
                     primary="true"
                     size="small"
@@ -47,7 +43,6 @@
                     >{{ $t("copy-link") }}</DfButton
                   >
                   <div class="grp">
-                    <input id="tokenLink" type="hidden" />
                     <button
                       class="fr-btn grp-btn"
                       :class="{
@@ -829,19 +824,17 @@ export default class Account extends Vue {
   }
 
   copyLink(url: string) {
-    const tl = document.querySelector("#tokenLink") as HTMLInputElement;
-    tl?.setAttribute("type", "text");
-    tl?.setAttribute("value", url);
-    tl?.select();
-
     try {
-      document.execCommand("copy");
+      navigator.clipboard.writeText(url);
+      this.$toasted.show(this.$i18n.t("copied").toString(), {
+        type: "success",
+        duration: 3000
+      });
       AnalyticsService.copyLink(this.pub ? "resume" : "full");
     } catch (err) {
       alert("Oops, unable to copy");
       return Promise.reject("error");
     }
-    tl?.setAttribute("type", "hidden");
     return Promise.resolve(true);
   }
 
@@ -1190,8 +1183,25 @@ hr {
   align-items: center;
 }
 
+.mobile-margin {
+  @media all and (max-width: 768px) {
+    margin-bottom: 1rem;
+  }
+}
+
 .btn-container {
   margin-left: auto;
+
+  @media all and (max-width: 600px) {
+    width: 100%;
+  }
+}
+
+.main-copy-btn {
+  height: 2.5rem;
+  @media all and (max-width: 600px) {
+    flex: 1;
+  }
 }
 
 .share-file-description {
@@ -1273,7 +1283,7 @@ hr {
     "instructional-time-title": "Instructional time",
     "instructional-time-text": "Once the files are completed, they are taken care of on average in less than 24 hours by our team of operators.",
     "congratulations-title": "🎉 Congratulations! Your DossierFacile becomes available!",
-    "congratulations-text-1": "In order to apply for the accommodation of your dreams, send your DossierFacile link, by email, sms, etc. to owners, lessors… of your choice. As a reminder, DossierFacile does not offer accommodation.",
+    "congratulations-text-1": "In order to apply for the accommodation of your dreams, send your DossierFacile link, by email, SMS, etc. to owners, lessors… of your choice. As a reminder, DossierFacile does not offer accommodation.",
     "congratulations-text-2": "Your data is protected!",
     "full-link-copied": "The link of my complete file is copied!",
     "public-link-copied": "The link of my summary file is copied!"
@@ -1314,7 +1324,7 @@ hr {
     "opinion": "Racontez-nous votre expérience DossierFacile.fr",
     "delete-account": "Supprimer mon compte",
     "share-file": "Partager mon dossier",
-    "share-file-description": "Copiez votre lien-dossier pour le partager ! À vous de l'envoyer aux propriétaires de votre choix (par mail, sms…)",
+    "share-file-description": "Copiez votre lien-dossier pour le partager ! À vous de l'envoyer aux propriétaires ou bailleurs de votre choix (par mail, SMS, etc.)",
     "file-resume": "Partager mon dossier de synthèse <br>(sans pièce justificative)",
     "file-full": "Partager mon dossier complet<br>(avec pièces justificatives)",
     "copy": "Copier",
@@ -1349,8 +1359,8 @@ hr {
     "messaging": "Consulter ma messagerie",
     "instructional-time-title": "Durée d'instruction",
     "instructional-time-text": "Une fois votre dossier complété et déposé, il est pris en charge en moyenne en moins de 24h par notre équipe d'opérateurs.",
-    "congratulations-title": "🎉 Félicitations ! Votre DossierFacile devient disponible !",
-    "congratulations-text-1": "Afin de candidater au logement de vos rêves, envoyez votre lien DossierFacile, par email, sms, etc. aux propriétaires, bailleurs… de votre choix. Pour rappel, DossierFacile ne propose pas de logement.",
+    "congratulations-title": "🎉 Félicitations ! Votre DossierFacile est disponible !",
+    "congratulations-text-1": "Afin de candidater au logement de vos rêves, envoyez votre lien DossierFacile, par email, SMS, etc. aux propriétaires, bailleurs de votre choix. Pour rappel, DossierFacile ne propose pas de logement.",
     "congratulations-text-2": "Vos informations sont protégées !",
     "full-link-copied": "Le lien de mon dossier complet est copié !",
     "public-link-copied": "Le lien de mon dossier de synthèse est copié !"

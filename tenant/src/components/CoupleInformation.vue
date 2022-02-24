@@ -31,7 +31,7 @@
               <div class="fr-col-10">
                 <div class="fr-grid-row nowrap">
                   <div class="center-icon fr-mr-1w">
-                    <span class="color--white material-icons md-24 round-icon"
+                    <span class="color--white material-icons md-24 round-icon" aria-hidden="true"
                       >person</span
                     >
                   </div>

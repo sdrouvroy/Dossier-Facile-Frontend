@@ -57,7 +57,7 @@
                   type="button"
                 >
                   <span class="color--primary material-icons md-24"
-                    >delete_forever</span
+                    >Effacer l'invitation</span
                   >
                 </button>
               </div>

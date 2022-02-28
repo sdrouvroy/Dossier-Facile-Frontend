@@ -66,7 +66,7 @@
         </div>
 
         <div class="fr-col-12 fr-mt-2w" v-if="getPartner() === undefined">
-          <label class="fr-label fr-mb-1w" for="email-conjoint">{{ $t("spouseEmail") }}</label>
+          <label class="fr-label fr-mb-1w">{{ $t("spouseEmail") }}</label>
           <validation-provider
             v-slot="{ errors }"
             :rules="{ email: true, custom: user.email }"
@@ -82,7 +82,6 @@
                 name="email"
                 placeholder="Ex : exemple@exemple.fr"
                 type="email"
-                id="email-conjoint"
               />
               <span
                 class="fr-error-text"

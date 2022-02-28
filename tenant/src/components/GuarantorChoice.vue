@@ -104,7 +104,7 @@
           <div class="fr-grid-row space-between">
             <h5>{{ $t("visale-title") }}</h5>
             <img
-              alt="logo visale"
+              alt="visale.fr - connecte emploi et logement"
               class="logo-visale"
               src="../assets/visale.png"
             />
